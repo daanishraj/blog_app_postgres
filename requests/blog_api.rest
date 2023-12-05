@@ -1,0 +1,15 @@
+GET http://localhost:3001/api/blogs
+###
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+
+{
+    "title": "Deutsch is einfach!",
+    "author": "Daanish",
+    "url": "www.yogananda.org",
+    "likes": 1
+}
+###
+GET http://localhost:3001/api/blogs/2
+###
+DELETE http://localhost:3001/api/blogs/4
