@@ -9,13 +9,19 @@ blogRouter.get('/', async (req, res)=> {
 })
 
 blogRouter.post('/', async (req, res)=> {
-    try {
         console.log(req.body)
+        const { title, url } = request.body
+
+        if (!title || !title.trim()) {
+          return response.status(400).json({ error: 'title is missing' })
+        }
+      
+        if (!url || !url.trim()) {
+          return response.status(400).json({ error: 'url is missing' })
+        }
+      
         const newBlog = await Blog.create(req.body)
         return res.json(newBlog)
-    } catch (error) {
-        return res.status(400).json({error})
-    }
 })
 
 blogRouter.get('/:id', blogFinder, async (req, res) => {
