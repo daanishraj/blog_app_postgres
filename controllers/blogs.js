@@ -40,4 +40,15 @@ blogRouter.delete('/:id', blogFinder, async (req, res) => {
         }
 })
 
+blogRouter.put('/:id', blogFinder, async (req, res) => {
+    const blog = req.blog
+    if (blog) {
+        blog.likes = req.body.likes
+        await blog.save()
+        res.status(200).json(blog)
+    } else {
+        res.status(404).json({error: 'Invalid id'})
+    }
+})
+
 module.exports = blogRouter
