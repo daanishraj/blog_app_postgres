@@ -1,4 +1,5 @@
 const { Blog } = require('../models/index')
+const { User } = require('../models/index')
 const logger = require('./logger')
 
 const requestLogger = (request, response, next) => {
@@ -31,6 +32,16 @@ const blogFinder = async (req, res, next) => {
     next()
 }
 
+const userFinder = async (req, res, next) => {
+  const user =await User.findOne({
+    where: {
+        username: req.params.username
+    }
+})
+  req.user = user
+  next()
+}
+
 module.exports = {
-    blogFinder, requestLogger, errorHandler, unknownEndpointHandler
+    blogFinder, userFinder, requestLogger, errorHandler, unknownEndpointHandler
 }

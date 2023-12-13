@@ -1,0 +1,23 @@
+GET http://localhost:3001/api/users
+###
+POST http://localhost:3001/api/users
+Content-Type: application/json
+
+{
+    "username": "sriyuk",
+    "password": "sekret",
+    "name": "yukteswar"
+}
+###
+GET http://localhost:3001/api/users/paramhansa
+###
+PUT http://localhost:3001/api/users/sriyuk
+Content-Type: application/json
+
+{
+    "username": "holyscience",
+    "password": "sekret",
+    "name": "yukteswar"
+}
+###
+DELETE http://localhost:3001/api/users/sriyuk
