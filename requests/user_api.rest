@@ -11,13 +11,13 @@ Content-Type: application/json
 ###
 GET http://localhost:3001/api/users/paramhansa@yogananda-srf.org
 ###
-PUT http://localhost:3001/api/users/gyoengyi@protonmail.com
+PUT http://localhost:3001/api/users/daanishraj@gmail.com
 Content-Type: application/json
 
 {
-    "username": "gyoengyi@hotmail.com",
+    "username": "daanishraj@gmail.com",
     "password": "sekret",
-    "name": "gigi"
+    "name": "daanish"
 }
 ###
 DELETE http://localhost:3001/api/users/paramhansa@yogananda-srf.org
