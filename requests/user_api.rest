@@ -4,20 +4,20 @@ POST http://localhost:3001/api/users
 Content-Type: application/json
 
 {
-    "username": "sriyuk",
+    "username": "holyscience@yogananda-srf.org",
     "password": "sekret",
-    "name": "yukteswar"
+    "name": "gigi"
 }
 ###
-GET http://localhost:3001/api/users/paramhansa
+GET http://localhost:3001/api/users/paramhansa@yogananda-srf.org
 ###
-PUT http://localhost:3001/api/users/sriyuk
+PUT http://localhost:3001/api/users/gyoengyi@protonmail.com
 Content-Type: application/json
 
 {
-    "username": "holyscience",
+    "username": "gyoengyi@hotmail.com",
     "password": "sekret",
-    "name": "yukteswar"
+    "name": "gigi"
 }
 ###
-DELETE http://localhost:3001/api/users/sriyuk
+DELETE http://localhost:3001/api/users/paramhansa@yogananda-srf.org
