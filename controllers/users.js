@@ -1,11 +1,16 @@
 const bcrypt = require('bcrypt')
 const router = require('express').Router()
-const { User } = require('../models/index')
+const { User, Blog } = require('../models/index')
 const { userFinder } = require('../utils/middleware')
 const SALT_ROUNDS = 1
 
 router.get('/', async (req, res) => {
-    const users = await User.findAll()
+    const users = await User.findAll({
+        include: {
+            model: Blog,
+            attributes: { exclude: ['userId'] }
+        }
+    })
     console.log(JSON.stringify(users, null, 2))
     res.json(users)
 })

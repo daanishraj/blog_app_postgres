@@ -2,9 +2,10 @@ GET http://localhost:3001/api/blogs
 ###
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRhYW5pc2hyYWpAZ21haWwuY29tIiwiaWQiOjEwLCJpYXQiOjE3MDU2ODg4NDd9.iT6LpKTAOn8bQshP4jYV6TM2lSWdOfsnL9ecLijwS-Y
 
 {
-    "title": "Deutsch is einfach!",
+    "title": "Test me!",
     "author": "Daanish",
     "url": "www.yogananda.org",
     "likes": 1

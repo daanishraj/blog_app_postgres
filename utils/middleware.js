@@ -1,5 +1,6 @@
 const { Blog } = require('../models/index')
 const { User } = require('../models/index')
+const jwt = require('jsonwebtoken')
 const logger = require('./logger')
 
 const requestLogger = (request, response, next) => {
@@ -21,8 +22,14 @@ const errorHandler = (error, request, response, next) => {
         return response.status(400).send({ error: 'malformatted id' })
       } else if (error.name === 'SequelizeValidationError') {
         return response.status(400).json({ error: error.message })
-      }
-
+      } else if (error.name === 'MissingTokenError' ||
+         error.name === 'InvalidAuthHeaderError' ||
+         error.name === 'InvalidTokenError'
+      ) {
+        return response.status(401).json({
+          error: error.message
+        })}
+    
     next(error)
 }
 
@@ -42,6 +49,32 @@ const userFinder = async (req, res, next) => {
   next()
 }
 
+const tokenExtractor = (request, response, next) => {
+  const authorization = request.get('authorization')
+  if (!authorization) {
+    const missingTokenError = new Error('token is missing')
+    missingTokenError.name = 'MissingTokenError'
+    next(missingTokenError)
+    }
+    if (!authorization.startsWith('Bearer ')) {
+      const authHeaderError = new Error('invalid authorization header')
+      authHeaderError.name = 'InvalidAuthHeaderError'
+      next(authHeaderError)
+    } 
+    const token = authorization.replace('Bearer ', '')
+      const decodedToken = jwt.verify(token, process.env.SECRET)
+      if (!decodedToken.id) {
+        const invalidTokenError = new Error('invalid token error')
+        invalidTokenError.name = 'InvalidTokenError'
+        next(invalidTokenError)
+      }
+    request.decodedToken = decodedToken
+
+  next()
+}
+
+
+
 module.exports = {
-    blogFinder, userFinder, requestLogger, errorHandler, unknownEndpointHandler
+    blogFinder, userFinder, tokenExtractor, requestLogger, errorHandler, unknownEndpointHandler
 }
